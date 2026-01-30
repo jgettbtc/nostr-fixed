@@ -1,8 +1,8 @@
 {
     "name": "nostr-fixed",
-    "version": "2026.1.29",
+    "version": "1.0.0",
     "type": "module",
-    "description": "Clawdbot Nostr channel plugin for NIP-04 encrypted DMs (dev version)",
+    "description": "Clawdbot Nostr channel plugin for NIP-04 encrypted DMs (fixed version)",
     "clawdbot": {
         "extensions": [
             "./index.ts"

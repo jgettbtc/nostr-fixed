@@ -18,6 +18,16 @@ cd /path/to/my/clawd/plugins #for example
 git clone https://github.com/jgettbtc/nostr-fixed
 ```
 
+2. Install dependencies
+```bash
+cd nostr-fixed
+npm install
+#try the following if you get a message like: "npm notice Access token expired or revoked. Please try logging in again."
+npm install nostr-tools@2.20.0
+#and then retry the install
+npm install
+```
+
 2. Add to your config:
 ```json
 "plugins": {
