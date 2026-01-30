@@ -1,11 +1,12 @@
 {
-  "id": "nostr",
-  "channels": [
-    "nostr"
-  ],
-  "configSchema": {
-    "type": "object",
-    "additionalProperties": false,
-    "properties": {}
+    "id": "nostr-fixed",
+    "channels": [
+      "nostr-fixed"
+    ],
+    "configSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {}
+    }
   }
-}
+  

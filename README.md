@@ -1,4 +1,4 @@
-# @clawdbot/nostr
+# Nostr Fixed (based on @clawdbot/nostr)
 
 Nostr DM channel plugin for Clawdbot using NIP-04 encrypted direct messages.
 
@@ -12,8 +12,24 @@ This extension adds Nostr as a messaging channel to Clawdbot. It enables your bo
 
 ## Installation
 
+1. Clone this repo:
 ```bash
-clawdbot plugins install @clawdbot/nostr
+cd /path/to/my/clawd/plugins #for example
+git clone https://github.com/jgettbtc/nostr-fixed
+```
+
+2. Add to your config:
+```json
+"plugins": {
+    "load": {
+      "paths": ["/path/to/my/clawd/plugins/nostr-fixed"]
+    },
+    "entries": {
+      "nostr-fixed": {
+        "enabled": true
+      }
+    }
+  }
 ```
 
 ## Quick Setup

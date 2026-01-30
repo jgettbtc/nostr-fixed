@@ -30,8 +30,8 @@ const DEFAULT_ACCOUNT_ID = "default";
 /**
  * List all configured Nostr account IDs
  */
-export function listNostrAccountIds(cfg: ClawdbotConfig): string[] {
-  const nostrCfg = (cfg.channels as Record<string, unknown> | undefined)?.nostr as
+export function listNostrAccountIds(cfg: ClawdbotConfig, channelKey = "nostr-fixed"): string[] {
+  const nostrCfg = (cfg.channels as Record<string, unknown> | undefined)?.[channelKey] as
     | NostrAccountConfig
     | undefined;
 
@@ -46,8 +46,8 @@ export function listNostrAccountIds(cfg: ClawdbotConfig): string[] {
 /**
  * Get the default account ID
  */
-export function resolveDefaultNostrAccountId(cfg: ClawdbotConfig): string {
-  const ids = listNostrAccountIds(cfg);
+export function resolveDefaultNostrAccountId(cfg: ClawdbotConfig, channelKey = "nostr-fixed"): string {
+  const ids = listNostrAccountIds(cfg, channelKey);
   if (ids.includes(DEFAULT_ACCOUNT_ID)) return DEFAULT_ACCOUNT_ID;
   return ids[0] ?? DEFAULT_ACCOUNT_ID;
 }
@@ -58,9 +58,11 @@ export function resolveDefaultNostrAccountId(cfg: ClawdbotConfig): string {
 export function resolveNostrAccount(opts: {
   cfg: ClawdbotConfig;
   accountId?: string | null;
+  channelKey?: string;
 }): ResolvedNostrAccount {
   const accountId = opts.accountId ?? DEFAULT_ACCOUNT_ID;
-  const nostrCfg = (opts.cfg.channels as Record<string, unknown> | undefined)?.nostr as
+  const channelKey = opts.channelKey ?? "nostr-fixed";
+  const nostrCfg = (opts.cfg.channels as Record<string, unknown> | undefined)?.[channelKey] as
     | NostrAccountConfig
     | undefined;
 

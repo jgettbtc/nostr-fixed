@@ -8,9 +8,9 @@ import { resolveNostrAccount } from "./src/types.js";
 import type { NostrProfile } from "./src/config-schema.js";
 
 const plugin = {
-  id: "nostr",
-  name: "Nostr",
-  description: "Nostr DM channel plugin via NIP-04",
+  id: "nostr-fixed",
+  name: "Nostr Fixed",
+  description: "Same as @clawdbot/nostr but with a few fixes to make it work",
   configSchema: emptyPluginConfigSchema(),
   register(api: ClawdbotPluginApi) {
     setNostrRuntime(api.runtime);
@@ -21,16 +21,16 @@ const plugin = {
       getConfigProfile: (accountId: string) => {
         const runtime = getNostrRuntime();
         const cfg = runtime.config.loadConfig() as ClawdbotConfig;
-        const account = resolveNostrAccount({ cfg, accountId });
+        const account = resolveNostrAccount({ cfg, accountId, channelKey: "nostr-fixed" });
         return account.profile;
       },
       updateConfigProfile: async (accountId: string, profile: NostrProfile) => {
         const runtime = getNostrRuntime();
         const cfg = runtime.config.loadConfig() as ClawdbotConfig;
 
-        // Build the config patch for channels.nostr.profile
+        // Build the config patch for channels.nostr-fixed.profile
         const channels = (cfg.channels ?? {}) as Record<string, unknown>;
-        const nostrConfig = (channels.nostr ?? {}) as Record<string, unknown>;
+        const nostrConfig = (channels["nostr-fixed"] ?? {}) as Record<string, unknown>;
 
         const updatedNostrConfig = {
           ...nostrConfig,
@@ -39,7 +39,7 @@ const plugin = {
 
         const updatedChannels = {
           ...channels,
-          nostr: updatedNostrConfig,
+          "nostr-fixed": updatedNostrConfig,
         };
 
         await runtime.config.writeConfigFile({
@@ -50,7 +50,7 @@ const plugin = {
       getAccountInfo: (accountId: string) => {
         const runtime = getNostrRuntime();
         const cfg = runtime.config.loadConfig() as ClawdbotConfig;
-        const account = resolveNostrAccount({ cfg, accountId });
+        const account = resolveNostrAccount({ cfg, accountId, channelKey: "nostr-fixed" });
         if (!account.configured || !account.publicKey) {
           return null;
         }
