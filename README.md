@@ -28,7 +28,7 @@ npm install nostr-tools@2.20.0
 npm install
 ```
 
-2. Add to your config:
+3. Add to your config:
 ```json
 "plugins": {
     "load": {
